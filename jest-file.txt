@@ -1,0 +1,43 @@
+const httpMocks = require('node-mocks-http');
+const newTodo = require('./mock.json');
+const todo = require('./../controllers/todos');
+
+const TodoModel = require('../models').Todo;
+
+TodoModel.create = jest.fn();
+
+describe('it shold work', () => {
+  it('should work add', () => {
+    //    console.log(newTodo);
+    expect(todo.add(3, 4)).toBe(7);
+  });
+});
+
+describe('object works', () => {
+  it('list check', () => {
+    expect(typeof todo.list).toBe('function');
+  });
+});
+
+describe('create check', () => {
+  it('create todo check', () => {
+    expect(typeof todo.create).toBe('function');
+  });
+  it('create todo check new', () => {
+    let req, res, next;
+    req = httpMocks.createRequest();
+    res = httpMocks.createResponse();
+    next = null;
+    req.body = newTodo;
+    todo.create(req, res, next);
+    //console.log(res);
+    expect(TodoModel.create).toBeCalled();
+  });
+});
+================================================
+mock.json:
+
+
+{
+  "title": "vvvv"
+}
