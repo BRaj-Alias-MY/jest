@@ -34,6 +34,22 @@ describe('create check', () => {
     expect(TodoModel.create).toBeCalled();
   });
 });
+
+describe('list check', () => {
+  it('list todos', () => {
+    expect(typeof todo.create).toBe('function');
+  });
+  it('list todos new', async () => {
+    let req, res, next;
+    req = httpMocks.createRequest();
+    res = httpMocks.createResponse();
+    next = null;
+    //  req.body = newTodo;
+    await todo.list(req, res, next);
+    //console.log(res);
+    expect(TodoModel.find).toBeTruthy();
+  });
+});
 ================================================
 mock.json:
 
